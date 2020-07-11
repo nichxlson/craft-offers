@@ -1,0 +1,36 @@
+{
+    "name": "nichxlson/craft-offers",
+    "description": "Offers for Craft Commerce",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "commerce",
+        "craft-plugin",
+        "offers"
+    ],
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Alex Nicholson",
+            "email": "hello@alexnicholson.co.uk"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "nichxlson\\offers\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Offers",
+        "handle": "offers",
+        "hasCpSettings": false,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/nichxlson/craft-offers/master/CHANGELOG.md",
+        "class": "nichxlson\\offers\\Offers"
+    }
+}
