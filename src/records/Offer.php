@@ -76,7 +76,5 @@ class Offer extends ActiveRecord implements OfferInterface
         return static::TYPE ?? '';
     }
 
-    public function handleAfterCaptureVariantSnapshot(CustomizeVariantSnapshotDataEvent $e) {
-        $e->fieldData['offers'][] = $this->toArray();
-    }
+    public function handleAfterCaptureVariantSnapshot(CustomizeVariantSnapshotDataEvent $e) {}
 }

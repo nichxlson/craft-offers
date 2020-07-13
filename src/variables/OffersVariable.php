@@ -3,6 +3,7 @@
 namespace nichxlson\offers\variables;
 
 use Craft;
+use craft\commerce\elements\Product;
 use craft\commerce\elements\Variant;
 use craft\commerce\records\Purchasable;
 use nichxlson\offers\Offers;
@@ -23,5 +24,9 @@ class OffersVariable
 
     public function getOffersByVariantId(int $variantId) {
         return Offers::getInstance()->offers->getOffersByPurchasableId($variantId);
+    }
+
+    public function getOffersByProduct(Product $product) {
+        return Offers::getInstance()->offers->getOffersByProductId($product->id);
     }
 }

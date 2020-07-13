@@ -2,6 +2,7 @@
 
 namespace nichxlson\offers\records;
 
+use craft\commerce\records\Product;
 use craft\commerce\records\Purchasable;
 use craft\db\ActiveRecord;
 
@@ -15,6 +16,10 @@ class OfferPurchasable extends ActiveRecord
 
     public function getOffer() {
         return $this->hasOne(Offer::class, ['id' => 'offerId']);
+    }
+
+    public function getProduct() {
+        return $this->hasOne(Product::class, ['id' => 'productId']);
     }
 
     public function getPurchasable() {

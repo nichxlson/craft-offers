@@ -2,6 +2,7 @@
 
 namespace nichxlson\offers\migrations;
 
+use craft\commerce\records\Product;
 use craft\commerce\records\Purchasable;
 use craft\db\Migration;
 use craft\helpers\MigrationHelper;
@@ -29,6 +30,7 @@ class Install extends Migration
         $this->createTable(OfferPurchasable::TABLE, [
             'id' => $this->primaryKey(),
             'offerId' => $this->integer()->notNull(),
+            'productId' => $this->integer()->notNull(),
             'purchasableId' => $this->integer()->notNull(),
             'dateCreated' => $this->dateTime(),
             'dateUpdated' => $this->dateTime(),
@@ -47,6 +49,15 @@ class Install extends Migration
         $this->addForeignKey(
             null,
             OfferPurchasable::TABLE,
+            'productId',
+            Product::tableName(),
+            'id',
+            'CASCADE'
+        );
+
+        $this->addForeignKey(
+            null,
+            OfferPurchasable::TABLE,
             'purchasableId',
             Purchasable::tableName(),
             'id',
@@ -54,6 +65,7 @@ class Install extends Migration
         );
 
         $this->createIndex(null, OfferPurchasable::TABLE, ['offerId', 'purchasableId'], true);
+        $this->createIndex(null, OfferPurchasable::TABLE, 'productId', false);
         $this->createIndex(null, OfferPurchasable::TABLE, 'purchasableId', false);
 
         // Create buy x get y free offers table

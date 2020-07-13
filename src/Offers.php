@@ -6,8 +6,11 @@ use Craft;
 use craft\base\Plugin;
 use craft\commerce\elements\Variant;
 use craft\commerce\events\CustomizeVariantSnapshotDataEvent;
+use craft\commerce\services\OrderAdjustments;
 use craft\events\DefineBehaviorsEvent;
+use craft\events\RegisterComponentTypesEvent;
 use craft\web\twig\variables\CraftVariable;
+use nichxlson\offers\adjusters\OfferGetXForYAdjuster;
 use nichxlson\offers\behaviors\VariantBehavior;
 use nichxlson\offers\records\Offer;
 use nichxlson\offers\variables\OffersVariable;
@@ -59,6 +62,10 @@ class Offers extends Plugin
         Event::on(CraftVariable::class, CraftVariable::EVENT_INIT, function (Event $event) {
             $variable = $event->sender;
             $variable->set('offers', OffersVariable::class);
+        });
+
+        Event::on(OrderAdjustments::class, OrderAdjustments::EVENT_REGISTER_ORDER_ADJUSTERS, function(RegisterComponentTypesEvent $e) {
+            $e->types[] = OfferGetXForYAdjuster::class;
         });
     }
 }
